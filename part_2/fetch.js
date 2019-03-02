@@ -13,6 +13,9 @@ let issIcon = L.icon({
 let issMarker;
 let update = 10000;
 
+
+// The dimensions of the div containing the tileset are 572x0. I cannot figure out why
+// this is the case.
 let map = L.map('iss-map').setView([0, 0], 2);
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -24,6 +27,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 let max_failed_attempts = 3;
 fetchISSData(max_failed_attempts);
 
+// Fetch data from iss website. Update lat and long variables. Finally, reposition
+// issMarker.
 function fetchISSData(attempts) {
   fetch(url)
     .then( res => res.json() )
